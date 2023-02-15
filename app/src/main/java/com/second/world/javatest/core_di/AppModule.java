@@ -1,4 +1,4 @@
-package com.second.world.javatest.di;
+package com.second.world.javatest.core_di;
 
 import android.content.Context;
 
