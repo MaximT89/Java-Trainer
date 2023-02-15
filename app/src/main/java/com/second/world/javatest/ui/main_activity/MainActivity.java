@@ -1,38 +1,26 @@
 package com.second.world.javatest.ui.main_activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.second.world.javatest.R;
 import com.second.world.javatest.core.App;
-import com.second.world.javatest.data.remote.BaseResult;
+import com.second.world.javatest.core.base_result.BaseResult;
 import com.second.world.javatest.data.remote.ImplRepository;
 import com.second.world.javatest.data.remote.ItemFromServer;
 import com.second.world.javatest.databinding.ActivityMainBinding;
 import com.second.world.javatest.ui.screens.first_screen.FirstFragment;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 import javax.inject.Inject;
 
-import io.reactivex.Notification;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,38 +72,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-//        mDisposable.add(repository.getData()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .doOnSubscribe(this::handleLoading)
-//                .subscribe(this::handleResponse, this::handleError, this::onComplete));
-    }
-
-    private void handleLoading(Observer<? super BaseResult<List<ItemFromServer>>> observer) {
-        Log.d("TAG", "handleLoading:");
-        binding.progressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void handleLoading(Disposable disposable) {
-        Log.d("TAG", "handleLoading:");
-        binding.progressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void onComplete() {
-        binding.progressBar.setVisibility(View.GONE);
-    }
-
-    private void handleError(Throwable throwable) {
-        binding.progressBar.setVisibility(View.GONE);
-        Log.d("TAG", "handleError: " + "error in activity");
-
-    }
-
-    private void handleResponse(BaseResult<List<ItemFromServer>> listBaseResult) {
-        binding.progressBar.setVisibility(View.GONE);
-        for (int i = 0; i < listBaseResult.getData().size(); i++) {
-            Log.d("TAG", "handleResponse: " + listBaseResult.getData().get(i).getName());
-        }
+//        BaseResult<ItemFromServer> base1 = new BaseResult.Success<>(new ItemFromServer());
+//        System.out.println("base1 " + base1.getCode().toString());
+//
+//        BaseResult<String> base2 = new BaseResult.Error<>("Empty");
+//        System.out.println("base1 " + base2.getCode().toString());
+//
+//        BaseResult<Object> base3 = new BaseResult.Loading<>();
     }
 
     @Override
@@ -125,3 +88,16 @@ public class MainActivity extends AppCompatActivity {
         mDisposable.clear();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

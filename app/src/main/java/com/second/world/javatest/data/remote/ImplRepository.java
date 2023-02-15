@@ -2,12 +2,13 @@ package com.second.world.javatest.data.remote;
 
 import android.util.Log;
 
+import com.second.world.javatest.core.base_result.BaseResult;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 
 public class ImplRepository {
 
@@ -18,19 +19,19 @@ public class ImplRepository {
         this.mRemoteDataSource = remoteDataSource;
     }
 
-    public Observable<BaseResult<List<ItemFromServer>>> getData() {
+    public Observable<BaseResult<Object>> getData() {
         return mRemoteDataSource.getServerData()
                 .map(listResponse -> {
                     if (listResponse.isSuccessful()) {
                         if (listResponse.body() != null) {
-                            return BaseResult.SUCCESS(listResponse.body());
+                            return new BaseResult.Success<>(listResponse.body());
                         } else {
                             Log.d("TAG", "getData: " + "error in repository body");
-                            return BaseResult.ERROR("body error");
+                            return new BaseResult.Error<>("body error");
                         }
                     } else {
                         Log.d("TAG", "getData: " + "error in repository");
-                        return BaseResult.ERROR("error response");
+                        return new BaseResult.Error<>("body error");
                     }
                 });
     }
